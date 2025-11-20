@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Home · Medium-ish Blog{% endblock %}
+
+{% block content %}
+{% if posts %}
+{% for post in posts %}
+<article class="post-card">
+  <h2>
+    <a href="{% url 'blog:post_detail' slug=post.slug %}">
+      {{ post.title }}
+    </a>
+  </h2>
+  <div class="meta">
+    By {{ post.author }} · {{ post.created_at|date:"M j, Y" }}
+  </div>
+  <p>
+    {{ post.content|truncatewords:30 }}
+  </p>
+  <a href="{% url 'blog:post_detail' slug=post.slug %}">Read more →</a>
+</article>
+{% endfor %}
+{% else %}
+<p>No posts yet. Log into the admin and create one!</p>
+{% endif %}
+{% endblock %}

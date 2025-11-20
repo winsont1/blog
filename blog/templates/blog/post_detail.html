@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ post.title }} · Medium-ish Blog{% endblock %}
+
+{% block content %}
+<article class="post-card">
+  <h1>{{ post.title }}</h1>
+  <div class="meta">
+    By {{ post.author }} · {{ post.created_at|date:"M j, Y" }}
+  </div>
+  <div>
+    {{ post.content|linebreaks }}
+  </div>
+</article>
+
+<p style="margin-top:16px;">
+  <a href="{% url 'blog:post_list' %}">← Back to all posts</a>
+</p>
+{% endblock %}
