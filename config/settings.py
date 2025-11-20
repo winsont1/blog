@@ -27,7 +27,19 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-9kbeob#7^&i-e(dv2f6ut
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+# Get allowed hosts from environment or use defaults
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+# Filter out empty strings
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
+
+# Automatically allow Heroku domains when running on Heroku
+# Django supports wildcard subdomains with a leading dot
+if os.environ.get('DYNO'):
+    ALLOWED_HOSTS.append('.herokuapp.com')
+
+# Default for local development if no hosts specified
+if not ALLOWED_HOSTS:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
