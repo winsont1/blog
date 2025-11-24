@@ -1,6 +1,6 @@
 {% extends "blog/base.html" %}
 
-{% block title %}{{ post.title }} · Medium-ish Blog{% endblock %}
+{% block title %}{{ post.title }} · TechDojo Blog{% endblock %}
 
 {% block content %}
 <article class="post-card">
@@ -13,7 +13,5 @@
   </div>
 </article>
 
-<p style="margin-top:16px;">
-  <a href="{% url 'blog:post_list' %}">← Back to all posts</a>
-</p>
+<a class="back-link" href="{% url 'blog:post_list' %}">← Back to all posts</a>
 {% endblock %}
